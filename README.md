@@ -1,5 +1,5 @@
-Ansible-cpufreq
-===============
+Ansible-cpufrequtils
+====================
 
 This is a simple ansible role for adjusting cpufrequtils preferences on Debian/Ubuntu.
 
