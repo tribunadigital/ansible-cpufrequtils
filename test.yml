@@ -11,10 +11,7 @@
   roles:
     - role: cpufrequtils
       cpufreq_enable: yes
-
-- hosts: "{{ test_hostname }}"
-  sudo: yes
-  tasks:
+  post_tasks:
     - name: test cpufreq_enable
       shell: . /etc/default/cpufrequtils && [ "$ENABLE" = "true" ] || exit 1
 
@@ -24,10 +21,7 @@
   roles:
     - role: cpufrequtils
       cpufreq_governor: "performance"
-
-- hosts: "{{ test_hostname }}"
-  sudo: yes
-  tasks:
+  post_tasks:
     - name: test cpufreq_governor
       shell: . /etc/default/cpufrequtils && [ "$GOVERNOR" = "performance" ] || exit 1
 
@@ -37,10 +31,7 @@
   roles:
     - role: cpufrequtils
       cpufreq_max_speed: 1234
-
-- hosts: "{{ test_hostname }}"
-  sudo: yes
-  tasks:
+  post_tasks:
     - name: test cpufreq_max_speed
       shell: . /etc/default/cpufrequtils && [ "$MAX_SPEED" = "1234" ] || exit 1
 
@@ -50,9 +41,6 @@
   roles:
     - role: cpufrequtils
       cpufreq_min_speed: 4321
-
-- hosts: "{{ test_hostname }}"
-  sudo: yes
-  tasks:
+  post_tasks:
     - name: test cpufreq_min_speed
       shell: . /etc/default/cpufrequtils && [ "$MIN_SPEED" = "4321" ] || exit 1
