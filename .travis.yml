@@ -1,0 +1,6 @@
+language: c
+before_install:
+  - mkdir roles
+  - ln -s . roles/cpufrequtils
+  - sudo pip install ansible
+script: ansible-playbook -i localhost, -c local -e test_hostname=localhost test.yml
