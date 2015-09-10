@@ -3,13 +3,13 @@
 - hosts: "{{ test_hostname }}"
   sudo: yes
   roles:
-    - role: cpufreq
+    - role: cpufrequtils
 
 # Test cpufreq_enable.
 - hosts: "{{ test_hostname }}"
   sudo: yes
   roles:
-    - role: cpufreq
+    - role: cpufrequtils
       cpufreq_enable: yes
 
 - hosts: "{{ test_hostname }}"
@@ -22,7 +22,7 @@
 - hosts: "{{ test_hostname }}"
   sudo: yes
   roles:
-    - role: cpufreq
+    - role: cpufrequtils
       cpufreq_governor: "performance"
 
 - hosts: "{{ test_hostname }}"
@@ -35,7 +35,7 @@
 - hosts: "{{ test_hostname }}"
   sudo: yes
   roles:
-    - role: cpufreq
+    - role: cpufrequtils
       cpufreq_max_speed: 1234
 
 - hosts: "{{ test_hostname }}"
@@ -48,7 +48,7 @@
 - hosts: "{{ test_hostname }}"
   sudo: yes
   roles:
-    - role: cpufreq
+    - role: cpufrequtils
       cpufreq_min_speed: 4321
 
 - hosts: "{{ test_hostname }}"
