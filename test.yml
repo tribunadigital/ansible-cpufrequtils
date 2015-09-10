@@ -1,0 +1,58 @@
+---
+# Test a basic run.
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  roles:
+    - role: cpufreq
+
+# Test cpufreq_enable.
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  roles:
+    - role: cpufreq
+      cpufreq_enable: yes
+
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  tasks:
+    - name: test cpufreq_enable
+      shell: . /etc/default/cpufrequtils && [ "$ENABLE" = "true" ] || exit 1
+
+# Test cpufreq_governor.
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  roles:
+    - role: cpufreq
+      cpufreq_governor: "performance"
+
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  tasks:
+    - name: test cpufreq_governor
+      shell: . /etc/default/cpufrequtils && [ "$GOVERNOR" = "performance" ] || exit 1
+
+# Test cpufreq_max_speed.
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  roles:
+    - role: cpufreq
+      cpufreq_max_speed: 1234
+
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  tasks:
+    - name: test cpufreq_max_speed
+      shell: . /etc/default/cpufrequtils && [ "$MAX_SPEED" = "1234" ] || exit 1
+
+# Test cpufreq_min_speed.
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  roles:
+    - role: cpufreq
+      cpufreq_min_speed: 4321
+
+- hosts: "{{ test_hostname }}"
+  sudo: yes
+  tasks:
+    - name: test cpufreq_min_speed
+      shell: . /etc/default/cpufrequtils && [ "$MIN_SPEED" = "4321" ] || exit 1

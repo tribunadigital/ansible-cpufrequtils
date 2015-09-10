@@ -1,0 +1,5 @@
+---
+cpufreq_enable: False
+cpufreq_governor: "ondemand"
+cpufreq_max_speed: 0
+cpufreq_min_speed: 0

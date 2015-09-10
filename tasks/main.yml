@@ -1,0 +1,13 @@
+---
+- name: install cpufrequtils
+  apt:
+    name: cpufrequtils
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: update cpufrequtils configuration file
+  template:
+    src: etc/default/cpufrequtils.j2
+    dest: /etc/default/cpufrequtils
+  notify:
+    - restart cpufrequtils
