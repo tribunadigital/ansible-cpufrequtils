@@ -9,5 +9,18 @@
   template:
     src: etc/default/cpufrequtils.j2
     dest: /etc/default/cpufrequtils
-  notify:
-    - restart cpufrequtils
+
+- name: check current governor
+  command: /bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+  register: current_governor
+
+- name: enable cpufrequtils
+  service:
+    name: cpufrequtils
+    enabled: yes
+
+- name: bounce service if necessary
+  service:
+    name: cpufrequtils
+    state: restarted
+  when: "'{{ current_governor.stdout }}' != '{{ cpufreq_governor }}'"

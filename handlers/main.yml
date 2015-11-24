@@ -1,6 +1,0 @@
----
-- name: restart cpufrequtils
-  service:
-    name: cpufrequtils
-    state: restarted
-    enabled: "{{ cpufreq_enable | bool }}"
