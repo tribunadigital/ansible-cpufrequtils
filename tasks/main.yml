@@ -10,17 +10,25 @@
     src: etc/default/cpufrequtils.j2
     dest: /etc/default/cpufrequtils
 
-- name: check current governor
-  command: /bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-  register: current_governor
-
 - name: enable cpufrequtils
   service:
     name: cpufrequtils
     enabled: yes
 
+- name: check if cpufreq kernel module is enabled
+  stat:
+    path: /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+  register: sysfs_file
+
+- name: check current governor
+  command: /bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+  register: current_governor
+  when: sysfs_file.stat.exists
+
 - name: bounce service if necessary
   service:
     name: cpufrequtils
     state: restarted
-  when: "'{{ current_governor.stdout }}' != '{{ cpufreq_governor }}'"
+  when:
+    - sysfs_file.stat.exists
+    - "'{{ current_governor.stdout }}' != '{{ cpufreq_governor }}'"
