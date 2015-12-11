@@ -25,6 +25,12 @@
   register: current_governor
   when: sysfs_file.stat.exists
 
+- name: disable ondemand service
+  service:
+    name: ondemand
+    state: stopped
+    enabled: no
+
 - name: bounce service if necessary
   service:
     name: cpufrequtils
