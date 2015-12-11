@@ -26,7 +26,9 @@
   when: sysfs_file.stat.exists
 
 - name: bounce service if necessary
-  command: /etc/init.d/cpufrequtils restart
+  service:
+    name: cpufrequtils
+    state: restarted
   when:
     - sysfs_file.stat.exists
     - "'{{ current_governor.stdout }}' != '{{ cpufreq_governor }}'"
