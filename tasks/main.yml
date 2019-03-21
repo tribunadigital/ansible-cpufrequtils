@@ -37,4 +37,4 @@
     state: restarted
   when:
     - sysfs_file.stat.exists
-    - "'{{ current_governor.stdout }}' != '{{ cpufreq_governor }}'"
+    - current_governor.stdout != cpufreq_governor
